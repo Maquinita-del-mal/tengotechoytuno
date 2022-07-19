@@ -1,6 +1,8 @@
-# proyecto1
+# tengotechoytuno
 
-## Nombre: Backend Api sistema de renta de inmuebles
+## Nombre:
+
+    Backend Api sistema de renta de inmuebles
 
 ## Descripción:
 
@@ -59,3 +61,11 @@
 - La contraseña deberá encriptarse antes de guardarse en la base
 
 - Los puntos de acceso del servicio deberán estar protegidos menos los de búsqueda de inmueble
+
+## branch template
+
+Todas las ramas deben salir de la rama llamada 'dev'
+
+```
+[feat|fix|chore|refactor]/[iniciales]/[qué-se-desarrolla]
+```
