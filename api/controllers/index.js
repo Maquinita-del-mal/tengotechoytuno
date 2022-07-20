@@ -1,0 +1,1 @@
+export * as propertyController from './propertyController.js';
