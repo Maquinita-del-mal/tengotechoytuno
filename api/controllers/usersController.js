@@ -9,7 +9,7 @@ userController.createUser =  async (req, res) => {
     const newUser = {
         name: req.body.name,
         lastName: req.body.lastName,
-        birthday: new Date(),
+        birthday: req.body.birthday,
         idNum: req.body.idNum,
         phone: req.body.phone,
         email: req.body.email,
