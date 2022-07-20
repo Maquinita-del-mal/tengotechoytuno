@@ -4,7 +4,7 @@ import  UserModel from '../models/User.js';
 
 const userController = {};
 
-userController.createUser =  (async (req, res) => {
+userController.createUser =  async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const newUser = {
         name: req.body.name,
@@ -19,6 +19,6 @@ userController.createUser =  (async (req, res) => {
    
     const createdUser = await UserModel.create(newUser);
     res.status(201).json(createdUser)
-})
+}
 
 export default userController;
