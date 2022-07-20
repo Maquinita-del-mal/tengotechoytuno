@@ -64,7 +64,7 @@
 
 ## branch template
 
-Todas las ramas deben salir de la rama llamada 'dev'
+Todas las ramas deben salir de la rama llamada dev
 
 ```
 [feat|fix|chore|refactor]/[iniciales]/[qué-se-desarrolla]
