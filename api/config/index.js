@@ -7,7 +7,7 @@ console.log(process.env.DB_URI)
 
 export default {
   database: {
-    uri: 'mongodb+srv://root1:root1@cluster0.qmeg72g.mongodb.net',
-    name: 'test',
+    uri: process.env.DB_URI,
+    name: process.env.DB_NAME,
   },
 };
