@@ -1,6 +1,6 @@
 
 import * as bcrypt from 'bcrypt';
-import  UserModel from '../models/Usuario.js';
+import  UserModel from '../models/User.js';
 
 const userController = {};
 

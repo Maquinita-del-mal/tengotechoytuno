@@ -1,6 +1,6 @@
 import express from 'express';
-import usersRoutes from './routes/users.routes.js';
-//Acá se importan las rutas
+import {usersRoutes} from './routes/index.js';
+
 
 const api = express();
 
@@ -13,7 +13,7 @@ api.get('/api', (_, res) => {
 api.use(express.json());
 api.use(express.urlencoded({ extended: true }));
 
-//Acá se registran las rutas
+
 api.use('/api/users', usersRoutes);
 
 
