@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 
 const messageSchema = new mongoose.Schema({
-   nombre: {
+   name: {
     type: String,
     required: true
    },
-   correo: {
+   mail: {
     type: String,
     required: true,
     unique : true  
