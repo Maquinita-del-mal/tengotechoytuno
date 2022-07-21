@@ -12,38 +12,32 @@ import config from '../config/index.js';
 
  */
 
-
 const getUserByIdToken = async (req, res) => {
-  const { id } = req.params
-  User.password = undefined
+  const { id } = req.params;
   try {
     const user = await User.findById(id);
 
-    if (user.role === 'admin') {
+    if (req.user.role === 'admin') {
       return res.json({
         msg: 'Usuario encontrado',
         user,
       });
     }
 
-    const payload = {
-      userId: user.id
-    };
+    //TODO: si no es admin, regresar el usuario que está en req.user
+    //Ese usuario lo saca del token
 
-    const token = jwt.encode(payload, config.token.secret);
-    return res.json({
-      msg: 'Usuario encontrado',
-      token,
-    });
-
+    if (req.user.role != 'admin') {
+      return res.json({
+        msg: 'Permisos no válidos'
+      });
+    }
   } catch (error) {
     return res.status(500).json({
       msg: 'Error al obtener Usuario',
       error,
     });
-  };
+  }
 };
 
-export {
-  getUserByIdToken,
-}
+export { getUserByIdToken };
