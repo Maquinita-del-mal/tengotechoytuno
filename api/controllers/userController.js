@@ -45,7 +45,6 @@ const login = async (req, res) => {
   }
 };
 
-
 const updateById = async (req, res) => {
   if (req.user.role != 'admin') {
     return res.status(402).json({
@@ -64,7 +63,30 @@ const updateById = async (req, res) => {
   }
 };
 
-export { create, login, updateById };
+const getUserByIdToken = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await UserModel.findById(id);
 
+    if (req.user.role === 'admin') {
+      return res.json({
+        msg: 'Usuario encontrado',
+        user,
+      });
+    }
 
+    if (req.user.role != 'admin') {
+      return res.json({
+        msg: 'Usuario encontrado',
+        user: req.user
+      }) 
+    }
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'Error al obtener Usuario',
+      error,
+    });
+  }
+};
 
+export { create, login, updateById, getUserByIdToken };
