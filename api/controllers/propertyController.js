@@ -1,3 +1,4 @@
+import { model } from 'mongoose';
 import { Property } from '../models/index.js';
 
 const returnError = (msg, res) => {
@@ -33,7 +34,18 @@ const getById = async (req, res) => {
 
 
 const updateById = async (req, res) => {
+    
+    try {
+      const foundProperty = await Property.findByIdAndUpdate(req.params.id,req.body);
+      return res.json({
+        msg: 'Property created',
+        property: foundProperty,
+      })
+    } catch (error) { 
+      throw new Error ('an error has ocurred'); 
+    }
 
+    
 };
 
 const deleteById = async (req, res) => {
