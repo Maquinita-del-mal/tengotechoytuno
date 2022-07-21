@@ -45,4 +45,26 @@ const login = async (req, res) => {
   }
 };
 
-export { create, login };
+
+const updateById = async (req, res) => {
+  if (req.user.role != 'admin') {
+    return res.status(402).json({
+      msg: 'No auth'
+    })
+  }
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findByIdAndUpdate(id, req.body);
+    return res.json({
+      msg: 'User actualizado',
+      user,
+    });
+  } catch (error) {
+    return returnError('Error al actualizar user');
+  }
+};
+
+export { create, login, updateById };
+
+
+
