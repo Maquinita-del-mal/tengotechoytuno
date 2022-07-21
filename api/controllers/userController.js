@@ -1,6 +1,4 @@
 import { User } from '../models/index.js';
-import jwt from 'jwt-simple';
-import config from '../config/index.js';
 
 /**
 
@@ -23,9 +21,6 @@ const getUserByIdToken = async (req, res) => {
         user,
       });
     }
-
-    //TODO: si no es admin, regresar el usuario que está en req.user
-    //Ese usuario lo saca del token
 
     if (req.user.role != 'admin') {
       return res.json({

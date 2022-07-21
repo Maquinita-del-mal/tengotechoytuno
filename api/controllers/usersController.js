@@ -45,4 +45,48 @@ const login = async (req, res) => {
   }
 };
 
-export { create, login };
+const updateById = async (req, res) => {
+  if (req.user.role != 'admin') {
+    return res.status(402).json({
+      msg: 'No auth'
+    })
+  }
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findByIdAndUpdate(id, req.body);
+    return res.json({
+      msg: 'User actualizado',
+      user,
+    });
+  } catch (error) {
+    return returnError('Error al actualizar user');
+  }
+};
+
+const getUserByIdToken = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await UserModel.findById(id);
+
+    if (req.user.role === 'admin') {
+      return res.json({
+        msg: 'Usuario encontrado',
+        user,
+      });
+    }
+
+    if (req.user.role != 'admin') {
+      return res.json({
+        msg: 'Usuario encontrado',
+        user: req.user
+      }) 
+    }
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'Error al obtener Usuario',
+      error,
+    });
+  }
+};
+
+export { create, login, updateById, getUserByIdToken };
