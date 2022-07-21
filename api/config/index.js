@@ -11,9 +11,5 @@ export default {
   },
   token: {
     secret: process.env.TOKEN_SECRET,
-<<<<<<< HEAD
-  }
-=======
   },
->>>>>>> c351adeba635c2993677097d5d043b612ccb8b4d
 };
