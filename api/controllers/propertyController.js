@@ -48,14 +48,6 @@ const updateById = async (req, res) => {};
 
 const deleteById = async (req, res) => {};
 
-/**
- * Filtro por rango de precio
- * Filtro por país y/o localidad
- * Filtro por tipo de inmueble
- * Filtro por número de recámaras
- * los filtros se pasan por medio de los req.query params
- */
-
 const getFiltersPropertys = async (req, res) => {
   const filters = req.query;
   try {
