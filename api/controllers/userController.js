@@ -48,8 +48,8 @@ const login = async (req, res) => {
 const updateById = async (req, res) => {
   if (req.user.role != 'admin') {
     return res.status(402).json({
-      msg: 'No auth'
-    })
+      msg: 'No auth',
+    });
   }
   try {
     const { id } = req.params;
@@ -66,24 +66,27 @@ const updateById = async (req, res) => {
 const deleteUserById = async (req, res) => {
   if (req.user.role != 'admin') {
     res.status(402).json({
-      msg: 'Dont have permise'
-    })
+      msg: 'Dont have permise',
+    });
   }
   try {
-    const { id } = req.params
-    const user = await UserModel.deleteById(id)
+    const { id } = req.params;
+    const user = await UserModel.deleteById(id);
     return res.status(200).json({
       msg: 'user deleted successfully',
-      user
-    })
+      user,
+    });
   } catch (error) {
     return res.status(404).json({
-      msg: 'User not found'
-    })
+      msg: 'User not found',
+    });
   }
-}
+};
 
-export { create, login, updateById, deleteUserById};
+const getUserByIdToken = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await UserModel.findById(id);
 
     if (req.user.role === 'admin') {
       return res.json({
@@ -95,8 +98,8 @@ export { create, login, updateById, deleteUserById};
     if (req.user.role != 'admin') {
       return res.json({
         msg: 'Usuario encontrado',
-        user: req.user
-      }) 
+        user: req.user,
+      });
     }
   } catch (error) {
     return res.status(500).json({
@@ -105,5 +108,4 @@ export { create, login, updateById, deleteUserById};
     });
   }
 };
-
-export { create, login, updateById, getUserByIdToken };
+export { create, login, updateById, getUserByIdToken, deleteUserById };
