@@ -10,7 +10,11 @@ export default async (req, res, next) => {
             })
         }
         const user = jwt.decode(token, config.token.secret)
+        req.user = user
+        next()
     } catch (error) {
-
+        return res.status(500).json({
+            msg: 'Error al validar'
+        })
     }
 }
