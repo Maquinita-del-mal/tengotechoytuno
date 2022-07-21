@@ -64,7 +64,27 @@ const updateById = async (req, res) => {
   }
 };
 
-export { create, login, updateById };
+const deleteUserById = async (req, res) => {
+  if (req.user.role != 'admin') {
+    res.status(402).json({
+      msg: 'Dont have permise'
+    })
+  }
+  try {
+    const { id } = req.params
+    const user = await UserModel.deleteById(id)
+    return res.status(200).json({
+      msg: 'user deleted successfully',
+      user
+    })
+  } catch (error) {
+    return res.status(404).json({
+      msg: 'User not found'
+    })
+  }
+}
+
+export { create, login, updateById, deleteUserById};
 
 
 
