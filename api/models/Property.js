@@ -1,13 +1,12 @@
 import mongoose from 'mongoose';
 
-
 const propertySchema = new mongoose.Schema({
   street: {
     type: String,
     required: true,
   },
 
-  outsideNumber:{
+  outsideNumber: {
     type: Number,
     required: true,
   },
@@ -50,21 +49,33 @@ const propertySchema = new mongoose.Schema({
   },
 
   description: String,
-  
+
   propertyType: {
     type: String,
     required: true,
   },
-  
+
   numberRooms: {
     type: Number,
     required: true,
   },
-  
-  images: [{
-    type: String,
-    required: true,
-  }],
+
+  images: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  messages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Message',
+    },
+  ],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: UserModel.name,
+  },
 });
 
 export default mongoose.model('Property', propertySchema);
