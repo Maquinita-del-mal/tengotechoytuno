@@ -69,7 +69,7 @@ const propertySchema = new mongoose.Schema({
   messages: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Message'
-  }]
+  }],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: UserModel.name

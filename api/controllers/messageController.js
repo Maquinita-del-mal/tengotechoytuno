@@ -21,4 +21,16 @@ const create = async (req, res) => {
     }
 }
 
-export { create }
+const getAllMsg = async (_, res) => {
+    try {
+      const messages = await Message.find();
+       return res.json({
+           msg: 'mensajes obtenidos',
+           messages
+       })
+    } catch (error) {
+        return returnError('Error al obtener mensajes', res);  
+    }
+} 
+
+export { create, getAllMsg }
