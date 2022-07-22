@@ -48,7 +48,15 @@ const getById = async (req, res) => {
 const updateById = async (req, res) => {};
 
 const updateById = async (req, res) => {
-    
+  const user = req.user 
+    if (user.role == "user" ){
+        return res.json({
+          msg: 'no eres usuario',
+          property: foundProperty,
+        }
+      )
+   } 
+  
     try {
       const foundProperty = await Property.findByIdAndUpdate(req.params.id,req.body);
       return res.json({
@@ -61,7 +69,7 @@ const updateById = async (req, res) => {
 
   }
 
-  
+
 const deleteById = async (req, res) => {};
 
 const getFiltersPropertys = async (req, res) => {
