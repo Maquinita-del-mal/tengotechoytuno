@@ -10,7 +10,7 @@ const returnError = (msg, res) => {
 const getMessageById = async (req, res) => {
   try {
     const { id } = req.params
-    const message = await Message.findById(id).populate('messages');
+    const message = await Property.findById(id).populate('messages');
     return res.json ({
       msg: 'Mensajes obtenidos del Inmueble',
       message,
