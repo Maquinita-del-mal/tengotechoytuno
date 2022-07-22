@@ -1,4 +1,3 @@
-import { model } from 'mongoose';
 import { Property } from '../models/index.js';
 
 const returnError = (msg, res) => {
@@ -45,7 +44,7 @@ const getById = async (req, res) => {
   }
 };
 
-const updateById = async (req, res) => {};
+// const updateById = async (req, res) => {};
 
 const updateById = async (req, res) => {
   const user = req.user 
