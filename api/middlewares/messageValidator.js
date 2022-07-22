@@ -10,6 +10,7 @@ const messageSchema = joi.object({
 export default async (req, res, next) => {
     try {
         await messageSchema.validateAsync(req.body)
+        next()
     } catch (error) {
         return res.status(500).json({ msg: 'error al validar mensaje' })
     }
