@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import UserModel from './User';
 
 
 const propertySchema = new mongoose.Schema({
@@ -69,6 +70,10 @@ const propertySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Message'
   }]
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: UserModel.name
+  }
 });
 
 export default mongoose.model('Property', propertySchema);

@@ -108,4 +108,26 @@ const getUserByIdToken = async (req, res) => {
     });
   }
 };
-export { create, login, updateById, getUserByIdToken, deleteUserById };
+
+const getAllUsers = async (req, res) => {
+  if (req.user.role != 'admin') {
+     return res.status(402).json({
+      msg: 'no authorization',
+      user,
+     });
+  }
+  try {
+    const getUsers = await UserModel.find({
+      user: req.user.id,
+    });
+    return res.json({
+      msg: 'Usuarios encontrados',
+      user,
+    });
+
+  } catch (error) {
+    return returnError('Error al obtener todos los usuarios');
+  }
+}
+
+export { create, login, updateById, getUserByIdToken, deleteUserById, getAllUsers };
