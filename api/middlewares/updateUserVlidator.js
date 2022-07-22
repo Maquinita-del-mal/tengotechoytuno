@@ -8,8 +8,7 @@ const userSchema = joi.object({
   phone: joi.string().required(),
   email: joi.string().required(),
   residence: joi.string().required(),
-  password: joi.string().required(),
-  role: joi.string().valid(['user', 'admin']).default('user'),
+  role: joi.string().optional().valid('user', 'admin'),
 });
 
 export default async (req, res, next) => {
