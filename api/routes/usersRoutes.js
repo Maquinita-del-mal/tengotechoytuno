@@ -18,7 +18,7 @@ router.delete('/:id', authValidator,userController.deleteUserById)
 
 router
 .route('/:id')
-.get(protectedRoute, userController.getUserByIdToken)
+.get(protectedRoute, userController.getUserByIdToken, userController.getAllUsers)
 
 
 export default router;
