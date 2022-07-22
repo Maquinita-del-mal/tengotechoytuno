@@ -10,4 +10,6 @@ router
 
 router.post('/properties/:id/messages', messageValidator, messageController.create)
 
+router.delete('/properties/:id/message/:messageId', messageController.deleteMessageById)
+
 export default router;
