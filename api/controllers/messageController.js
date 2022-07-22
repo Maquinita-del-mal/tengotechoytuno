@@ -6,6 +6,22 @@ const returnError = (msg, res) => {
   });
 };
 
+const getMessageById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const message = await Property.findById(id).populate('messages');
+    return res.json({
+      msg: 'Mensajes obtenidos del Inmueble',
+      message,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'Error al buscar los mensajes',
+      error,
+    });
+  }
+};
+
 const create = async (req, res) => {
   try {
     const newMessage = await Message.create(req.body);
@@ -44,7 +60,6 @@ const deleteMessageById = async (req, res) => {
       foundProperty.messages.splice(index, 1);
       await foundProperty.save();
     }
-
     return res.status(200).json({
       msg: 'message deleted successfully',
       message,
@@ -55,5 +70,4 @@ const deleteMessageById = async (req, res) => {
     });
   }
 };
-
-export { create, deleteMessageById, getAllMsg };
+export { create, deleteMessageById, getMessageById, getAllMsg };
