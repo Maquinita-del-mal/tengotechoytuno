@@ -122,7 +122,10 @@ const getUserByIdToken = async (req, res) => {
       users.forEach((user) => {
         usersMap[user._id] = users
       });
-      res.json();
+      res.json({
+        msg: 'Usuarios encontrados',
+        usersMap
+      });
   } catch (error) {
     return returnError('Error al obtener todos los usuarios');
   }
