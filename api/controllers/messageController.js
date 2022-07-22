@@ -1,12 +1,21 @@
 import { Message, Property } from "../models/index.js";
 
+const returnError = (msg, res) => {
+    return res.status(500).json({
+        msg,
+    });
+};
+
+
 const getMessageById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const message = await Message.findById(id);
+    const { id } = req.params
+    const message = await Message.find();
+    const property = await Property.findById(id);
+    property.messages.push(message)
     return res.json ({
-      msg: 'Mensajes obtenidos por id',
-      message,
+      msg: 'Mensajes obtenidos del Inmueble',
+      property,
     });
   } catch (error) {
     return res.status(500).json({
@@ -14,12 +23,6 @@ const getMessageById = async (req, res) => {
       error,
     });
   }
-};
-
-const returnError = (msg, res) => {
-    return res.status(500).json({
-        msg,
-    });
 };
 
 const create = async (req, res) => {
