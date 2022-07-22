@@ -21,4 +21,27 @@ const create = async (req, res) => {
     }
 }
 
-export { create }
+const deleteMessageById = async (req, res) => {
+    try {
+      const { id,messageId } = req.params;
+      const foundProperty = await Property.findById(id); 
+      const message = await Message.deleteById(messageId);
+
+      const index = foundProperty.messages.indexOf(messageId);
+        if (index > -1) { 
+        foundProperty.messages.splice(index, 1);  
+        await foundProperty.save();
+        }
+
+      return res.status(200).json({
+        msg: 'message deleted successfully',
+        message,
+      });
+    } catch (error) {
+      return res.status(404).json({
+        msg: 'message not found',
+      });
+    }
+  };
+
+export { create, deleteMessageById }
