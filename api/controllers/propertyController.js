@@ -44,7 +44,30 @@ const getById = async (req, res) => {
   }
 };
 
-const updateById = async (req, res) => {};
+// const updateById = async (req, res) => {};
+
+const updateById = async (req, res) => {
+  const user = req.user 
+    if (user.role == "user" ){
+        return res.json({
+          msg: 'no eres usuario',
+          property: foundProperty,
+        }
+      )
+   } 
+  
+    try {
+      const foundProperty = await Property.findByIdAndUpdate(req.params.id,req.body);
+      return res.json({
+        msg: 'Property created',
+        property: foundProperty,
+      })
+    } catch (error) { 
+      throw new Error ('an error has ocurred'); 
+    }
+
+  }
+
 
 const deleteById = async (req, res) => {};
 

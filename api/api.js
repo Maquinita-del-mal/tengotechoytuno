@@ -1,5 +1,5 @@
 import express from 'express';
-import { usersRoutes } from './routes/index.js';
+import { usersRoutes, messageRoutes } from './routes/index.js';
 
 const api = express();
 
@@ -13,5 +13,7 @@ api.use(express.json());
 api.use(express.urlencoded({ extended: true }));
 
 api.use('/api/users', usersRoutes);
+api.use('/api/messages', messageRoutes)
+
 
 export default api;
