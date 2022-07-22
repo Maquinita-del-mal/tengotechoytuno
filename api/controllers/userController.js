@@ -109,22 +109,20 @@ const getUserByIdToken = async (req, res) => {
   }
 };
 
-const getAllUsers = async (req, res) => {
-  if (req.user.role != 'admin') {
-     return res.status(402).json({
-      msg: 'no authorization',
-      user,
-     });
-  }
-  try {
-    const getUsers = await UserModel.find({
-      user: req.user.id,
-    });
-    return res.json({
-      msg: 'Usuarios encontrados',
-      user,
-    });
-
+  const getAllUsers = async (req, res) => {
+    if (req.user.role != 'admin') {
+      return res.status(402).json({
+       msg: 'no authorization',
+       user,
+      });
+   }
+    try {
+      const users = await UserModel.find();
+      const usersMap = {};
+      users.forEach((user) => {
+        usersMap[user._id] = users
+      });
+    res.send(usersMap);
   } catch (error) {
     return returnError('Error al obtener todos los usuarios');
   }
