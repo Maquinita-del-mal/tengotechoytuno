@@ -10,12 +10,10 @@ const returnError = (msg, res) => {
 const getMessageById = async (req, res) => {
   try {
     const { id } = req.params
-    const message = await Message.find();
-    const property = await Property.findById(id);
-    property.messages.push(message)
+    const message = await Message.findById(id).populate('messages');
     return res.json ({
       msg: 'Mensajes obtenidos del Inmueble',
-      property,
+      message,
     });
   } catch (error) {
     return res.status(500).json({
