@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import UserModel from './User';
 
 const propertySchema = new mongoose.Schema({
   street: {
@@ -59,7 +60,6 @@ const propertySchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-
   images: [
     {
       type: String,

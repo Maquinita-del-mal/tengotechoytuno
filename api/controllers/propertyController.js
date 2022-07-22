@@ -44,8 +44,54 @@ const getById = async (req, res) => {
   }
 };
 
-const updateById = async (req, res) => {};
+// const updateById = async (req, res) => {};
+
+const updateById = async (req, res) => {
+  const user = req.user 
+    if (user.role == "user" ){
+        return res.json({
+          msg: 'no eres usuario',
+          property: foundProperty,
+        }
+      )
+   } 
+  
+    try {
+      const foundProperty = await Property.findByIdAndUpdate(req.params.id,req.body);
+      return res.json({
+        msg: 'Property created',
+        property: foundProperty,
+      })
+    } catch (error) { 
+      throw new Error ('an error has ocurred'); 
+    }
+
+  }
+
 
 const deleteById = async (req, res) => {};
 
-export { create, getAll, getById, updateById, deleteById };
+const getFiltersPropertys = async (req, res) => {
+  const filters = req.query;
+  try {
+    const propertys = await Property.find(filters);
+    return res.json({
+      msg: 'Inmuebles obtenidos',
+      propertys,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'Error al buscar los inmuebles',
+      error,
+    });
+  }
+};
+
+export {
+  create,
+  getAll,
+  getById,
+  updateById,
+  deleteById,
+  getFiltersPropertys,
+};
